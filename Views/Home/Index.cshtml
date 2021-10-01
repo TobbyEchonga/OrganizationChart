@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        //access link from the database and convert it to a json to br easily readable
+        var url = window.location.href;
+        var arr = url.split("/");
+        var result = arr[0] + "//" + arr[2];
+        var fake = "https://fakejsonapi.com/fake-api/eskom-international/users-dabeng";
+        var emps = result + "/Employees/OrgJson";
+        var region = result + "/Employees/ByRegion";
+        var user = result + "/Employees/ByUsers";
+        console.log("result: "+result);
+        console.log("emps: "  +emps);
+        console.log("region: "+region);
+        console.log("user: "+user);
+        console.log(url + "/Employees/OrgJson");
+    </script>
+}

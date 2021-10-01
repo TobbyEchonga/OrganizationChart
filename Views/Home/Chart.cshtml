@@ -1,0 +1,76 @@
+﻿@{
+    ViewData["Title"] = "Chart";
+}
+
+
+<div id="chart-container"></div>
+
+@section Scripts {
+
+    <script type="text/javascript" src="~/es6-promise/es6-promise.auto.min.js"></script>
+    <script type="text/javascript" src="~/js/html2canvas.min.js"></script>
+    <script type="text/javascript" src="~/jspdf/jspdf.umd.min.js"></script>
+    <script type="text/javascript" src="~/mock/jquery.mockjax.min.js"></script>
+    <script type="text/javascript" src="~/orgchart/js/jquery.orgchart.js"></script>
+    <script type="text/javascript">
+        //access link from the database and convert it to a json to br easily readable
+        var url = window.location.href;
+        var arr = url.split("/");
+        var result = arr[0] + "//" + arr[2];
+        var result1 = arr[1];
+        var result2 = arr[2];
+        var result3 = arr[3];
+        var result4 = arr[4];
+        console.log("1: -" + result1 + " 2: -" + result2 + " 3: -" + result3 + " 4: -" + result4);
+        var url1 = arr[0] + "//" + arr[1] +"/"+ arr[2] + "/" + arr[3];
+        var emps = result + "/Employees/OrgJson";
+        console.log("url: "+url);
+        console.log("result: " +result);
+        console.log("emps: " + emps);
+        console.log("1: -" + result1 + " 2: -" + result2 + " 3: -" + result3 + " 4: -" + result4);
+        console.log("url: " + url1 + "/Employees/OrgJson");
+        fetch(result + "/Employees/OrgJson")
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("NETWORK RESPONSE ERROR");
+                }
+            })
+            .then(data => displayEmployees(data))
+            .catch((error) => console.error("FETCH ERROR:", error));
+        function displayEmployees(data) {
+            const employees = data[0];
+            console.log("-----Employees-----");
+            console.log(employees);
+            console.log("-----Employer-----");
+            console.log(data);
+            console.log("-----DataUser-----");
+            console.log(data[0]);
+            console.log("-----Data-----");
+            console.log(data[1]);
+
+            //Convert the json from the link to build a organchart
+            $(function () {
+                $.mockjax({
+                    url: result + "/Employees/OrgJson",
+                    responseTime: 1000,
+                    contentType: 'application/json',
+                });
+                $('#chart-container').orgchart({
+                    //for local db
+                    'data': data[0],
+                    //for eskom db
+                    //'data': data[1],
+                    'visibleLevel': 2,
+                    'nodeContent': 'title',
+                    'exportButton': true,
+                    'exportFileextension': 'pdf',
+                    'exportFilename': 'MyOrgChart'
+                });
+
+            });
+
+        }
+    </script>
+}

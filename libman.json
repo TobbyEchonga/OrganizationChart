@@ -1,0 +1,33 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "jquery@3.6.0",
+      "destination": "wwwroot/jquery/"
+    },
+    {
+      "library": "jquery-mockjax@2.6.0",
+      "destination": "wwwroot/mock/",
+      "files": [
+        "jquery.mockjax.min.js"
+      ]
+    },
+    {
+      "library": "orgchart@3.1.1",
+      "destination": "wwwroot/orgchart/"
+    },
+    {
+      "library": "jspdf@2.3.1",
+      "destination": "wwwroot/jspdf/"
+    },
+    {
+      "library": "html2pdf.js@0.10.1",
+      "destination": "wwwroot/html2pdf.js/"
+    },
+    {
+      "library": "es6-promise@4.2.8",
+      "destination": "wwwroot/es6-promise/"
+    }
+  ]
+}
